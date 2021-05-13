@@ -9,7 +9,7 @@ class Schema
     private $database;
     public $columns;
     public $foreigns;
-    private $table_prefix;
+    public $table_prefix;
 
     public function __construct()
     {
