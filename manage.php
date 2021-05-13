@@ -6,10 +6,12 @@ if(isset($argv[1]))
     switch($argv[1]){
         case "rebuild_all":
             $c = 0;
+            $base_classname = "\\Models\\";
             foreach (scandir('models') as $file) {
                 if ($file != ".." && $file != "." && $file != "Base.model.php") {
                     $file = explode(".", $file);
-                    new $file[0](true);
+                    $classname = $base_classname.$file[0];
+                    new $classname(true);
                     echo "\t\e[36m- \e[33mModelname\e[35m: \e[39m" . $file[0] . "\n\n";
                     $c += 1;
                 }
