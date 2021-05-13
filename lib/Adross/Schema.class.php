@@ -63,9 +63,28 @@ class Schema
         return $this->database->Query("SELECT * FROM ".$this->schemaname);
     }
 
-    public function show($id)
+    public function showAllByID($id)
     {
         return $this->database->Query("SELECT * FROM ".$this->schemaname." WHERE _id = ".$id);
+    }
+
+    public function joinSelector($data)
+    {
+        /* Example of use
+        joinSelector([[
+            "table"=>$post->schemaname,
+            "column"=>"user"
+        ],[
+            "table"=>"tb_test",
+            "column"=>"user"
+        ]]) */
+        $inner = "";
+        foreach($data as $d)
+        {
+            $inner .= " INNER JOIN ".$d['table']." ON ".$this->schemaname."._id = ".$d['table'].".".$d['column'];
+        }
+        $query = "SELECT * FROM `".$this->schemaname."` ".$inner;
+        return $this->database->Query($query);
     }
 
     public function create($data)
@@ -96,13 +115,23 @@ class Schema
         $this->database->NonQuery($query);
     }
 
-    public function update($id)
+    public function update($data)
     {
-
+        $value = null;
+        foreach($this->columns as $colum)
+        {
+            if($colum['name'] == $data[1])
+            {
+                $value = (is_numeric($data[2]) && ($colum['type'] == "INTEGER" || $colum['type'] == "FLOAT" || $colum['type'] == "DOUBLE")) ? $data[2] : "'".$data[2]."'";
+            }
+        }
+        $query = "UPDATE `".$this->schemaname."` SET `".$data[1]."` = ".$value." WHERE _id=".$data[0].";";
+        $this->database->NonQuery($query);
     }
 
     public function delete($id)
     {
-
+        $query = "DELETE FROM `".$this->schemaname."` WHERE _id=".$id.";";
+        $this->database->NonQuery($query);
     }
 }
