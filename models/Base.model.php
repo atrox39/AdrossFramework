@@ -8,6 +8,7 @@ class Base extends Schema
 {
     public function __construct($force=false)
     {
+        parent::__construct();
         $this->schemaname = "tb_posts";
         $this->columns =
         [
