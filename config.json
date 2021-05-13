@@ -1,0 +1,16 @@
+{
+    "debug":"true",
+    "database_deploy":{
+        "host":"localhost",
+        "user":"root",
+        "password":"",
+        "database":"adrossframework"
+    },
+    "database_dev":{
+        "host":"localhost",
+        "user":"root",
+        "password":"",
+        "database":"adrossframework"
+    },
+    "main_template":"templates/main.html"
+}
