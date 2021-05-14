@@ -18,6 +18,20 @@ if(isset($argv[1]))
             }
         break;
 
+        case "verify_all":
+            $c = 0;
+            $base_classname = "\\Models\\";
+            foreach (scandir('models') as $file) {
+                if ($file != ".." && $file != "." && $file != "Base.model.php") {
+                    $file = explode(".", $file);
+                    $classname = $base_classname.$file[0];
+                    new $classname();
+                    echo "\t\e[36m- \e[33mModelname\e[35m: \e[39m" . $file[0] . "\n\n";
+                    $c += 1;
+                }
+            }
+        break;
+
         case "models":
             echo "\n";
             $count = 0;
