@@ -200,3 +200,5 @@ class Base extends Schema
 Como podemos observar esta es la base de todo modelo en el framework.
 
 Cuenta con nombre_clase.model.php como estructura.
+
+Se añadieron los archivos Procfile y composer.json para que el framework sea compatible con heroku, tambien es necesario recalcar el uso de .htaccess redireccionando a index constantemente.
