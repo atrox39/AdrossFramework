@@ -34,7 +34,7 @@ class Base extends Schema
         
         /*$this->foreigns = [[
             "foreign"=>[
-                "model_schema_name"=> $modelname->schemaname,
+                "model_schema_name"=> $this->table_prefix.'tablename',
                 "relation_name"=>"SAMPLE",
                 "root"=>"user",
                 "on_delete"=>"CASCADE",
