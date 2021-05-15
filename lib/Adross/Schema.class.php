@@ -60,12 +60,30 @@ class Schema
 
     public function index()
     {
-        return $this->database->Query("SELECT * FROM ".$this->schemaname);
+        $query = "SELECT * FROM ".$this->schemaname;
+        $query_result = $this->database->Query($query);
+        if(isset(func_get_args()[0]))
+        {
+            if(func_get_args()[0])
+            {
+                return [$query_result, $query];
+            }
+        }
+        return $query_result;
     }
 
     public function showAllByID($id)
     {
-        return $this->database->Query("SELECT * FROM ".$this->schemaname." WHERE _id = ".$id);
+        $query = "SELECT * FROM ".$this->schemaname." WHERE _id = ".$id;
+        $query_result = $this->database->Query($query);
+        if(isset(func_get_args()[1]))
+        {
+            if(func_get_args()[1])
+            {
+                return [$query_result, $query];
+            }
+        }
+        return $query_result;
     }
 
     public function joinSelector($data)
@@ -84,7 +102,15 @@ class Schema
             $inner .= " INNER JOIN ".$d['table']." ON ".$this->schemaname."._id = ".$d['table'].".".$d['column'];
         }
         $query = "SELECT * FROM `".$this->schemaname."` ".$inner;
-        return $this->database->Query($query);
+        $query_result = $this->database->Query($query);
+        if(isset(func_get_args()[1]))
+        {
+            if(func_get_args()[1])
+            {
+                return [$query_result, $query];
+            }
+        }
+        return $query_result;
     }
 
     public function create($data)
@@ -112,7 +138,14 @@ class Schema
         }
         $query .= ");";
         //echo $query;
-        $this->database->NonQuery($query);
+        $query_result = $this->database->NonQuery($query);
+        if(isset(func_get_args()[1]))
+        {
+            if(func_get_args()[1])
+            {
+                return [$query_result, $query];
+            }
+        }
     }
 
     public function update($data)
@@ -126,12 +159,26 @@ class Schema
             }
         }
         $query = "UPDATE `".$this->schemaname."` SET `".$data[1]."` = ".$value." WHERE _id=".$data[0].";";
-        $this->database->NonQuery($query);
+        $query_result = $this->database->NonQuery($query);
+        if(isset(func_get_args()[1]))
+        {
+            if(func_get_args()[1])
+            {
+                return [$query_result, $query];
+            }
+        }
     }
 
     public function delete($id)
     {
         $query = "DELETE FROM `".$this->schemaname."` WHERE _id=".$id.";";
-        $this->database->NonQuery($query);
+        $query_result = $this->database->NonQuery($query);
+        if(isset(func_get_args()[1]))
+        {
+            if(func_get_args()[1])
+            {
+                return [$query_result, $query];
+            }
+        }
     }
 }
