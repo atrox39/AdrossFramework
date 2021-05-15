@@ -196,3 +196,7 @@ class Base extends Schema
     }
 }
 ```
+
+Como podemos observar esta es la base de todo modelo en el framework.
+
+Cuenta con nombre_clase.model.php como estructura.
