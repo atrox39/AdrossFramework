@@ -146,6 +146,10 @@ class Schema
                 return [$query_result, $query];
             }
         }
+        else
+        {
+            return $query_result;
+        }
     }
 
     public function update($data)
