@@ -8,5 +8,11 @@ $app->router->get('/', function($req, $res){
     $res->render('index');
 });
 
-$app->Check();
+$app->router->get('/get-user-info/:id/:post', function($req, $res){
+    $res->json($req['params']);
+});
+/*
+$app->router->post('/check', function($req, $res){
+    $res->send('Hola');
+});*/
 ?>
