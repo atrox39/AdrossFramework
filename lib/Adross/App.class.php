@@ -16,7 +16,8 @@ class App
                 $this->active_routes[] = [
                     "route"=> $route->route,
                     "data"=>$route->res->content,
-                    "type"=>$route->res->type
+                    "type"=>$route->res->type,
+                    "method"=>$route->method
                 ];
             }
         }
@@ -29,7 +30,7 @@ class App
         $content = null;
         if(count($this->active_routes)>0){
             foreach($this->active_routes as $route){
-                if($_SERVER['REQUEST_URI']==$route["route"]){
+                if($_SERVER['REQUEST_URI']==$route["route"] && $_SERVER['REQUEST_METHOD'] == $route['method']){
                     $content = $route["data"];
                     $type = $route["type"];
                     $temp = true;

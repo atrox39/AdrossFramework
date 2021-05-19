@@ -6,17 +6,11 @@ class Route
 {
     public static function get($route, $fn)
     {
-        if($_SERVER['REQUEST_METHOD'] == "GET")
-            return Route::__base($route, $fn);
-        else
-            return null;
+        return Route::__base($route, $fn);
     }
     public static function post($route, $fn)
     {
-        if($_SERVER['REQUEST_METHOD'] == "POST")
-            return Route::__base($route, $fn);
-        else
-            return null;
+        return Route::__base($route, $fn);
     }
 
     private static function __base($route, $fn)
