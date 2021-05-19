@@ -3,12 +3,20 @@ namespace Adross;
 use Adross\Route;
 class Router
 {
-
+    public $routes = [];
+    /*
     public $req = ["body"=>[],"URL"=>"/", "METHOD"=>"GET", "params"=>[]];
-    private $route;
+    public $route;
     public $url;
     public $params;
     public $user_route;
+    public $response;
+    public $temp_routes = [];
+    public $temp_function = [];
+    public $temp_respond = [];
+
+    // Rebuild
+    //public $req = [];
 
     public function __construct()
     {
@@ -48,6 +56,7 @@ class Router
     public function get()
     {
         if($_SERVER['REQUEST_METHOD'] == "GET"){
+            $this->temp_routes[] = ["route"=>$this->user_route,"method"=>"GET", "params"=>""];
             $this->base(func_get_args());
             return true;
         }
@@ -57,6 +66,7 @@ class Router
     public function post()
     {
         if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $this->temp_routes[] = ["route"=>$this->user_route, "method"=>"POST"];
             $this->base(func_get_args());
             return true;
         }
@@ -68,27 +78,17 @@ class Router
         $params = func_get_args()[0];
         $this->user_route = $params[0];
         $this->readParams($this->user_route);
-        if($this->url==$this->user_route)
-        {
-            $fn = null;
-            $middleware = null;
-            if(count($params)==2)
-            {
-                $fn = $params[1];
-            }
-            else if(count($params)==3)
-            {
-                $middleware = $params[1];
-                $fn = $params[2];
-                $middleware();
-            }
-            $this->setParams();
-            $fn($this->req, $this->route);
+        $fn = null;
+        $middleware = null;
+        if (count($params) == 2) {
+            $fn = $params[1];
+        } else if (count($params) == 3) {
+            $middleware = $params[1];
+            $fn = $params[2];
+            $middleware();
         }
-        else
-        {
-            return;
-        }
+        $this->setParams();
+        $fn($this->req, $this->route);
     }
 
     private function setParams()
@@ -104,11 +104,6 @@ class Router
         }
         $this->req["METHOD"] = $_SERVER['REQUEST_METHOD'];
         $this->req["URL"] = $_SERVER['REQUEST_URI'];
-    }
-
-    public function redirect($route)
-    {
-        echo '<script>window.location.href="'.$route.'"</script>';
-    }
+    }*/
 }
 ?>

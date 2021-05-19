@@ -1,18 +1,10 @@
 <?php
-include_once('autoload.class.php');
 use Adross\App;
-
+include_once('autoload.class.php');
+include_once('./routes/Home.php');
 $app = new App();
-
-$app->router->get('/', function($req, $res){
-    $res->render('index');
-});
-
-$app->router->get('/get-user-info/:id/:post', function($req, $res){
-    $res->json($req['params']);
-});
-/*
-$app->router->post('/check', function($req, $res){
-    $res->send('Hola');
-});*/
+// Route example, home
+$app->use($home);
+// Listen Routes
+$app->listenRoutes();
 ?>
