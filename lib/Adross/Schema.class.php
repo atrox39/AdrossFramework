@@ -23,6 +23,7 @@ class Schema
         if(isset(func_get_args()[0])){
             if(func_get_args()[0]){
                 echo "\n\t\e[36m- \e[33mTable \e[35m- \e[39m".$this->schemaname."\n";
+                $this->database->NonQuery("SET foreign_key_checks = 0;");
                 $this->database->NonQuery("DROP TABLE IF EXISTS ".$this->schemaname);
                 echo "\t\e[36m- \e[33mDROP AND RECREATE FOR\e[35m: \e[39m`".$this->schemaname."`\n";
             }
