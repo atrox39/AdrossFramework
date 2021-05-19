@@ -6,14 +6,14 @@ class Route
 {
     public static function get($route, $fn)
     {
-        return Route::__base($route, $fn);
+        return Route::__base($route, $fn, "GET");
     }
     public static function post($route, $fn)
     {
-        return Route::__base($route, $fn);
+        return Route::__base($route, $fn, "POST");
     }
 
-    private static function __base($route, $fn)
+    private static function __base($route, $fn, $method)
     {
         $response = new class{
             public $route;
@@ -23,7 +23,6 @@ class Route
             public $fn;
             public function __construct()
             {
-                $this->method = $_SERVER['REQUEST_METHOD'];
                 $this->req = new class{
                     public $body;
                     public $params;
@@ -50,6 +49,7 @@ class Route
                 };
             }
         };
+        $response->method = $method;
         $response->req->params = Route::getParams($route);
         if(count($response->req->params)>0) $response->route = $_SERVER['REQUEST_URI'];
         else $response->route = $route;
